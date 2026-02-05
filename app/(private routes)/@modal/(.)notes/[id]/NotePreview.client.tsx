@@ -3,7 +3,7 @@
 import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchSingleNoteById } from "@/lib/api";
+import { fetchSingleNoteById } from "@/lib/api/clientApi";
 import Modal from "@/components/Modal/Modal";
 
 import css from "./NotePreview.module.css";

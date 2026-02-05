@@ -6,12 +6,10 @@ import { useDebounceValue } from "usehooks-ts";
 
 import css from "./Notes.client.module.css";
 
-import type { FetchNotesResponse } from "@/lib/api";
-import { fetchNotes } from "@/lib/api";
+import type { FetchNotesResponse } from "@/lib/api/clientApi";
+import { fetchNotes } from "@/lib/api/clientApi";
 import NoteList from "@/components/NoteList/NoteList";
 import Pagination from "@/components/Pagination/Pagination";
-import Modal from "@/components/Modal/Modal";
-import NoteForm from "@/components/NoteForm/NoteForm";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import ErrorBox from "@/components/ErrorBox/ErrorBox";
 import Loader from "@/components/Loader/Loader";

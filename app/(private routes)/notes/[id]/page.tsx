@@ -4,7 +4,7 @@ import {
   dehydrate,
   QueryClient,
 } from "@tanstack/react-query";
-import { fetchSingleNoteById } from "@/lib/api";
+import { fetchSingleNoteById } from "@/lib/api/clientApi";
 import NoteDetailsClient from "./NoteDetails.client";
 
 interface NoteDetailsProps {
