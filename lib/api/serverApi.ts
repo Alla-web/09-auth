@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { nextServer } from "./api";
 
 import { User } from "@/types/auth";
-import { Note } from "@/types/note";
+import { Note, FetchNotesResponse } from "@/types/note";
 
 export const getServerMe = async (): Promise<User> => {
   const cookieStore = await cookies();
@@ -32,7 +32,7 @@ export async function fetchNotes(
   searchQuery?: string,
   tag?: string,
 ) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   const res = await nextServer.get("/notes", {
     params: {
@@ -50,8 +50,8 @@ export async function fetchNotes(
   return res.data;
 }
 
-export const fetchNoteById = async (id: string): Promise<Note> => {
-  const cookieStore = cookies();
+export const fetchSingleNoteById = async (id: string): Promise<Note> => {
+  const cookieStore = await cookies();
 
   const response = await nextServer.get<Note>(`/notes/${id}`, {
     headers: {
@@ -61,3 +61,18 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 
   return response.data;
 };
+
+export async function fetchTags() {
+  const { notes }: FetchNotesResponse = await fetchNotes();
+
+  if (notes.length === 0) return [];
+
+  const tags = notes.reduce<string[]>((accu, note) => {
+    if (!accu.includes(note.tag)) {
+      accu.push(note.tag);
+    }
+    return accu;
+  }, []);
+
+  return tags;
+}

@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+import css from "./page.module.css";
+
 import type { RegisterRequest } from "@/types/auth";
 import { register } from "@/lib/api/clientApi";
 import { ApiError } from "@/app/api/api";
 import { useAuthStore } from "@/lib/store/authStore";
-
-import css from "./page.module.css";
 
 export default function SignUp() {
   const router = useRouter();

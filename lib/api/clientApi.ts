@@ -1,16 +1,11 @@
 import { nextServer } from "./api";
-import type { Note, CreateNotePayload } from "@/types/note";
+import type { Note, CreateNotePayload, FetchNotesResponse } from "@/types/note";
 import {
   LoginRequest,
   RegisterRequest,
   User,
   CheckSessionRequest,
 } from "@/types/auth";
-
-export interface FetchNotesResponse {
-  notes: Note[];
-  totalPages: number;
-}
 
 export async function fetchSingleNoteById(id: string) {
   const response = await nextServer.get<Note>(`/notes/${id}`, {});
@@ -57,8 +52,6 @@ export async function fetchTags() {
     }
     return accu;
   }, []);
-
-  console.log(tags);
 
   return tags;
 }

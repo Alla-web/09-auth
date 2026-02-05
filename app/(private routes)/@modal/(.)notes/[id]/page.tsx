@@ -5,7 +5,7 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 
-import { fetchSingleNoteById } from "@/lib/api/clientApi";
+import { fetchSingleNoteById } from "@/lib/api/serverApi";
 import NotesPreview from "./NotePreview.client";
 
 interface NotePreviewProps {

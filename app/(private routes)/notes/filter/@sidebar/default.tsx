@@ -3,7 +3,7 @@
 import Link from "next/link";
 import css from "./default.module.css";
 
-import { fetchTags } from "@/lib/api/clientApi";
+import { fetchTags } from "@/lib/api/serverApi";
 
 export default async function SidebarNotes() {
   const tags = await fetchTags();
