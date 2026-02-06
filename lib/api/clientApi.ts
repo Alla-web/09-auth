@@ -3,10 +3,9 @@ import type { Note, CreateNotePayload, FetchNotesResponse } from "@/types/note";
 import {
   LoginRequest,
   RegisterRequest,
-  User,
   CheckSessionRequest,
-  UpdateUserRequest,
 } from "@/types/auth";
+import { User, UpdateUserRequest } from "@/types/user";
 
 export async function fetchSingleNoteById(id: string) {
   const response = await nextServer.get<Note>(`/notes/${id}`, {});

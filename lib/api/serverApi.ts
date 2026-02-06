@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { nextServer } from "./api";
 
-import { User } from "@/types/auth";
+import { User } from "@/types/user";
 import { Note, FetchNotesResponse } from "@/types/note";
 
 export const getServerMe = async (): Promise<User> => {
