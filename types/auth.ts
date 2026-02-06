@@ -7,7 +7,7 @@ export type RegisterRequest = {
 export type User = {
   id: string;
   email: string;
-  userName?: string;
+  username?: string;
   photoUrl?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -20,4 +20,9 @@ export type LoginRequest = {
 
 export type CheckSessionRequest = {
   success: boolean;
+};
+
+export type UpdateUserRequest = {
+  username?: string;
+  email?: string;
 };

@@ -5,6 +5,7 @@ import {
   RegisterRequest,
   User,
   CheckSessionRequest,
+  UpdateUserRequest,
 } from "@/types/auth";
 
 export async function fetchSingleNoteById(id: string) {
@@ -80,4 +81,7 @@ export const logout = async (): Promise<void> => {
   await nextServer.post("/auth/logout");
 };
 
-export const updateMe = async () => {};
+export const updateMe = async (payload: UpdateUserRequest) => {
+  const { data } = await nextServer.patch<User>("/users/me", payload);
+  return data;
+};

@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect } from "react";
 
 import { FiX } from "react-icons/fi";
