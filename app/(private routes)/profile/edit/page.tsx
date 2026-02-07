@@ -2,11 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import css from "./page.module.css";
 
 import { useAuthStore } from "@/lib/store/authStore";
-import AvatarPicker from "@/components/AvatarPicker/AvatarPicker";
 import { getMe, updateMe } from "@/lib/api/clientApi";
 
 export default function Edit() {
@@ -26,8 +26,8 @@ export default function Edit() {
     });
   }, []);
 
-  const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSaveUser = async (formData: FormData) => {
+    const username = (formData.get("username") as string) ?? "";
     const updatedUser = await updateMe({ username });
     setUser(updatedUser);
     router.push("/profile");
@@ -45,14 +45,20 @@ export default function Edit() {
     <div className={css.mainContent}>
       <div className={css.profileCard}>
         <h1 className={css.formTitle}>Edit profile</h1>
-        <AvatarPicker profilePhotoUrl={avatar} />
+        <Image
+          src={avatar || "/user-default-photo.webp"}
+          width={300}
+          height={300}
+          alt="Avatar"
+        />
         <p>
           <span style={{ fontWeight: "bold" }}>Email: </span>
           {email}
         </p>
-        <form onSubmit={handleSaveUser} className={css.form}>
+        <form action={handleSaveUser} className={css.form}>
           <input
             type="text"
+            name="username"
             value={username}
             onChange={handleChange}
             className={css.input}
