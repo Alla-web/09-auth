@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 
 import css from "./page.module.css";
 
+import { useAuthStore } from "@/lib/store/authStore";
 import AvatarPicker from "@/components/AvatarPicker/AvatarPicker";
 import { getMe, updateMe } from "@/lib/api/clientApi";
 
@@ -13,19 +14,22 @@ export default function Edit() {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     getMe().then((user) => {
       setUsername(user.username ?? "");
       setEmail(user.email ?? "");
-      setPhotoUrl(user.photoUrl ?? "");
+      setAvatar(user.avatar ?? "");
     });
   }, []);
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await updateMe({ username });
+    const updatedUser = await updateMe({ username });
+    setUser(updatedUser);
     router.push("/profile");
   };
 
@@ -41,7 +45,7 @@ export default function Edit() {
     <div className={css.mainContent}>
       <div className={css.profileCard}>
         <h1 className={css.formTitle}>Edit profile</h1>
-        <AvatarPicker profilePhotoUrl={photoUrl} />
+        <AvatarPicker profilePhotoUrl={avatar} />
         <p>
           <span style={{ fontWeight: "bold" }}>Email: </span>
           {email}

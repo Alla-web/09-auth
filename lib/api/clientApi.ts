@@ -4,8 +4,9 @@ import {
   LoginRequest,
   RegisterRequest,
   CheckSessionRequest,
+  UpdateUserRequest,
 } from "@/types/auth";
-import { User, UpdateUserRequest } from "@/types/user";
+import { User } from "@/types/user";
 
 export async function fetchSingleNoteById(id: string) {
   const response = await nextServer.get<Note>(`/notes/${id}`, {});
@@ -68,7 +69,7 @@ export const login = async (payload: LoginRequest) => {
 
 export const checkSession = async () => {
   const response = await nextServer.get<CheckSessionRequest>("/auth/session");
-  return response.data.success;
+  return response.data;
 };
 
 export const getMe = async () => {

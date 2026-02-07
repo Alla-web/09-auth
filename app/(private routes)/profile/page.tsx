@@ -20,8 +20,6 @@ export const metadata: Metadata = {
 export default async function Profile() {
   const user = await getServerMe();
 
-  console.log("PhotoURL: ", user.photoUrl);
-
   return (
     <div className={css.mainContent}>
       <section className={css.profileCard}>
@@ -30,7 +28,7 @@ export default async function Profile() {
         <div className={css.profileInfo}>
           <div className={css.avatar}>
             <Image
-              src={user.photoUrl || "/user-defaul-photo.webp"}
+              src={user.avatar || "/user-defaul-photo.webp"}
               width={300}
               height={300}
               alt="Avatar"

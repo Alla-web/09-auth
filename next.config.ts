@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
         hostname: "notehub-api.goit.study",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "ac.goit.global",
+        pathname: "/**",
+      },
     ],
   },
 };
