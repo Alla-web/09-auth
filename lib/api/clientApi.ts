@@ -42,21 +42,6 @@ export async function deleteNote(noteId: Note["id"]) {
   return response.data;
 }
 
-export async function fetchTags() {
-  const { notes } = await fetchNotes();
-
-  if (notes.length === 0) return [];
-
-  const tags = notes.reduce<string[]>((accu, note) => {
-    if (!accu.includes(note.tag)) {
-      accu.push(note.tag);
-    }
-    return accu;
-  }, []);
-
-  return tags;
-}
-
 export const register = async (payload: RegisterRequest) => {
   const response = await nextServer.post<User>("/auth/register", payload);
   return response.data;

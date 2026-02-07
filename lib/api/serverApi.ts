@@ -17,14 +17,14 @@ export const getServerMe = async (): Promise<User> => {
 export const checkServerSession = async () => {
   // Дістаємо поточні cookie
   const cookieStore = await cookies();
-  const res = await nextServer.get("/auth/session", {
+  const response = await nextServer.get("/auth/session", {
     headers: {
       // передаємо кукі далі
       Cookie: cookieStore.toString(),
     },
   });
   // Повертаємо повний респонс, щоб proxy мав доступ до нових cookie
-  return res;
+  return response;
 };
 
 export async function fetchNotes(
@@ -34,7 +34,7 @@ export async function fetchNotes(
 ) {
   const cookieStore = await cookies();
 
-  const res = await nextServer.get("/notes", {
+  const response = await nextServer.get("/notes", {
     params: {
       page,
       perPage: 12,
@@ -47,7 +47,7 @@ export async function fetchNotes(
     },
   });
 
-  return res.data;
+  return response.data;
 }
 
 export const fetchSingleNoteById = async (id: string): Promise<Note> => {
